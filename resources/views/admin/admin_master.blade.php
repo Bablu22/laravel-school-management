@@ -133,14 +133,13 @@
 <script src="{{asset('assets/plugins/colorpicker/jquery-asColor.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/plugins/colorpicker/jquery-asGradient.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/plugins/colorpicker/jquery-asColorPicker.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/plugins/select2/select2.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/plugins/select2/select2.full.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js')}}"></script>
 <script src="{{asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
 <script src="{{asset('assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('assets/plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js')}}"
         type="text/javascript"></script>
-
 
 <!-- Plugins Init js -->
 <script src="{{asset('assets/pages/form-advanced.js')}}"></script>
@@ -166,7 +165,6 @@
             passwordInput.val('{{ Str::random(8) }}');
         });
     });
-
 </script>
 <script type="text/javascript">
     $(function () {
@@ -207,5 +205,14 @@
         modal.find('.modal-body #class-name').val(className);
     });
 </script>
+
+<script>
+    $(document).ready(function () {
+
+
+
+    });
+</script>
+
 </body>
 </html>

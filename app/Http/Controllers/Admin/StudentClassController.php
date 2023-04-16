@@ -29,7 +29,6 @@ class StudentClassController extends Controller
     public function destroy(StudentClass $class): RedirectResponse
     {
         $class->delete();
-        toastr()->success('User deleted success.');
-        return redirect()->route('class.all');
+        return redirect()->back()->with('success', 'Delete success');
     }
 }

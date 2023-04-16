@@ -48,13 +48,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group mb-0">
-                                    <label for="role" class="my-2 py-1">Role</label>
+                                    <label for="select2-4ta2-container" class="my-2 py-1">Role</label>
                                     <div>
-                                        <select id="role" name="role"
+                                        <select id="select2-4ta2-container" name="role"
                                                 class="select2 form-control mb-3 custom-select">
                                             <option value="" disabled selected hidden>Select</option>
-                                            <option value="user">User</option>
-                                            <option value="admin">Admin</option>
+                                            <option value="User">User</option>
+                                            <option value="Admin">Admin</option>
+                                            <option value="Operator">Operator</option>
                                         </select>
                                     </div>
                                 </div>

@@ -38,13 +38,6 @@ class AssignSubjectController extends Controller
         return $this->storeOrUpdateModel(AssignSubject::class, $request->all(), $id);
     }
 
-    public function destroy($id): RedirectResponse
-    {
-        $fee_category_amount = AssignSubject::find($id);
-        $fee_category_amount->delete();
-        toastr()->success('Deleted success.');
-        return redirect()->back();
-    }
 
     function storeOrUpdateModel($modelClass, $requestData, $id = null): RedirectResponse
     {
@@ -64,8 +57,8 @@ class AssignSubjectController extends Controller
         $model->pass_mark = $requestData['pass_mark'];
         $model->subjective_mark = $requestData['subjective_mark'];
         $model->save();
-        toastr()->success(($id ? 'Update' : 'Add') . ' success');
-        return redirect()->back();
+        return redirect()->back()->with('success', ($id ? 'Update' : 'Add') . ' success');
+
     }
 }
 

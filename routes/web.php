@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -14,6 +13,9 @@ use App\Http\Controllers\Admin\ExamTypeController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\AssignSubjectController;
 use App\Http\Controllers\Admin\DesignationController;
+use App\Http\Controllers\Student\StudentRegController;
+use App\Http\Controllers\Student\RegistrationFeeController;
+use App\Http\Controllers\Student\MonthlyFeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,14 +41,14 @@ Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session
 
     // User related all routes
     Route::controller(UserController::class)->group(function () {
-        Route::get('/user/all', 'index')->name('user.all');
-        Route::get('/user/create', 'create')->name('user.create');
-        Route::get('/user/update/{user}', 'update')->name('user.update');
-        Route::post('/user/user/{user}', 'storeUpdate')->name('user.store.update');
-        Route::post('/user/store', 'store')->name('user.store');
-        Route::put('/users/{user}/deactivate', 'deactivateUser')->name('users.deactivate');
-        Route::put('/users/{user}/activate', 'activateUser')->name('users.activate');
-        Route::get('/user/{user}', 'destroy')->name('user.destroy');
+        Route::get('/user/all', 'index')->name('user.all')->middleware('auth', 'role:Admin');
+        Route::get('/user/create', 'create')->name('user.create')->middleware('auth', 'role:Admin');
+        Route::get('/user/update/{user}', 'update')->name('user.update')->middleware('auth', 'role:Admin');
+        Route::post('/user/user/{user}', 'storeUpdate')->name('user.store.update')->middleware('auth', 'role:Admin');
+        Route::post('/user/store', 'store')->name('user.store')->middleware('auth', 'role:Admin');
+        Route::put('/users/{user}/deactivate', 'deactivateUser')->name('users.deactivate')->middleware('auth', 'role:Admin');
+        Route::put('/users/{user}/activate', 'activateUser')->name('users.activate')->middleware('auth', 'role:Admin');
+        Route::get('/user/{user}', 'destroy')->name('user.destroy')->middleware('auth', 'role:Admin');
     });
 
     // Profile related all routes
@@ -128,7 +130,6 @@ Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session
         Route::get('/subjects-assign', 'subjectAssignIndex')->name('subject-assign.all');
         Route::post('/subjects-assign/store', 'subjectAssignStore')->name('subject-assign.store');
         Route::get('/subjects-assign/{class_id}', 'details')->name('subject-assign.details');
-        Route::get('/subjects-assign/{subjectAssign}', 'destroy')->name('subject-assign.destroy');
         Route::put('/subjects-assign/{id}', 'update')->name('subject-assign.update');
     });
 
@@ -138,6 +139,32 @@ Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session
         Route::post('/designations/store', 'designationStore')->name('designation.store');
         Route::get('/designations/{designation}', 'destroy')->name('designation.destroy');
         Route::put('/designations/{id}', 'update')->name('designation.update');
+    });
+
+    // Student student registration management setup
+    Route::controller(StudentRegController::class)->group(function () {
+        Route::get('/student-registration', 'registrationIndex')->name('student-registration.all');
+        Route::get('/student-registration/create', 'registrationCreate')->name('student-registration.create');
+        Route::post('/student-registration/store', 'registrationStore')->name('student-registration.store');
+        Route::get('/student-update/{id}', 'update')->name('student-registration.update');
+        Route::post('/student-update/store/{id}', 'updateStore')->name('student-registration.updateStore');
+        Route::get('/student-registration/{id}', 'details')->name('student-registration.details');
+        Route::get('/student-registration/delete/{id}', 'deleteStudent')->name('student-registration.delete');
+    });
+
+    // Student student registration fee management setup
+    Route::controller(RegistrationFeeController::class)->group(function () {
+        Route::get('/registration/fees', 'RegistrationFeeView')->name('reg-fee.all');
+        Route::get('/registration/fees/payslip', 'RegFeePayslip')->name('reg-fee.payslip');
+
+    });
+
+    // Student student registration fee management setup
+    Route::controller(MonthlyFeeController::class)->group(function () {
+        Route::get('/student/monthly-fees', 'MonthlyFeeCreateView')->name('monthly-fee.create');
+        Route::get('/student/monthly-fees/create', 'MonthlyFeeView')->name('monthly-fee.all');
+        Route::get('/registration/fees/payslip', 'RegFeePayslip')->name('reg-fee.payslip');
+
     });
 
 });

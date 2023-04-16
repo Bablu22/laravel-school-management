@@ -43,6 +43,8 @@
                             <h3 class="card-title">{{$user->name}}</h3>
                             <h6 class="font-16 mt-0">Email: {{$user->email}}</h6>
                             <h6 class="font-16 mt-0">Phone: {{$user->phone}}</h6>
+                            <h6 class="font-16 mt-0">Address: {{$user->address}}</h6>
+                            <h6 class="font-16 mt-0">Gender: {{$user->gender}}</h6>
                             <h6 class="font-16 mt-0">Role: {{$user->role}}</h6>
                             <a href="{{route('profile.edit')}}" class="btn btn-primary waves-effect waves-light w-100">Edit
                                 Profile</a>

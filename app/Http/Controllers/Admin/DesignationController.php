@@ -10,6 +10,7 @@ use Illuminate\View\View;
 
 class DesignationController extends Controller
 {
+
     public function designationIndex(): View
     {
         $designations = Designation::all();
@@ -29,7 +30,6 @@ class DesignationController extends Controller
     public function destroy(Designation $designation): RedirectResponse
     {
         $designation->delete();
-        toastr()->success('Designation deleted success.');
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Delete success');
     }
 }

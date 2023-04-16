@@ -29,7 +29,6 @@ class ExamTypeController extends Controller
     public function destroy(ExamType $examType): RedirectResponse
     {
         $examType->delete();
-        toastr()->success('Exam type deleted success.');
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Delete success');
     }
 }

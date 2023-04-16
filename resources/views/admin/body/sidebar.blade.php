@@ -10,11 +10,12 @@
                     <span> Dashboard </span>
                 </a>
             </li>
-
-            <li>
-                <a href="{{route('user.all')}}" class="waves-effect"><i class="mdi mdi-account"></i>
-                    <span>Manage User</span></a>
-            </li>
+            @if(Auth::user()->role=='Admin')
+                <li>
+                    <a href="{{route('user.all')}}" class="waves-effect"><i class="mdi mdi-account"></i>
+                        <span>Manage User</span></a>
+                </li>
+            @endif
 
             <li class="menu-title">Setup Management</li>
 
@@ -42,10 +43,11 @@
                     <span>Student Manage</span> <span class="float-right"><i
                             class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="list-unstyled">
-                    {{--                    <li><a href="">Student Class</a></li>--}}
+                    <li><a href="{{route('student-registration.all')}}">Student Registration</a></li>
+                    <li><a href="{{route('reg-fee.all')}}">Registration Fees</a></li>
+                    <li><a href="{{route('monthly-fee.all')}}">Monthly Fees</a></li>
                 </ul>
             </li>
-
         </ul>
     </div>
     <div class="clearfix"></div>

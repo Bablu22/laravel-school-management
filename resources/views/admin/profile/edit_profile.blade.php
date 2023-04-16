@@ -48,12 +48,32 @@
                                     </div>
                                 </div>
                                 <div class="form-group mb-0">
-                                    <label for="email" class="my-2 py-1">Phone</label>
+                                    <label for="phone" class="my-2 py-1">Phone</label>
                                     <div>
-                                        <input value="{{$user->phone}}" type="text" class="form-control" id="email"
+                                        <input value="{{$user->phone}}" type="text" class="form-control" id="phone"
                                                name="phone" required=""
                                                parsley-type="email"
                                                placeholder="Enter phone">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label for="address" class="my-2 py-1">Address</label>
+                                    <div>
+                                        <input value="{{$user->address}}" type="text" class="form-control" id="address"
+                                               name="address" required=""
+                                               parsley-type="address"
+                                               placeholder="Enter address">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label for="gender" class="my-2 py-1">Gender</label>
+                                    <div>
+                                        <select required id="gender" name="gender"
+                                                class="select2 form-control mb-3 custom-select">
+                                            <option value="" disabled selected hidden>Select</option>
+                                            <option value="Male" {{$user->gender=='Male'?"selected":""}}>Male</option>
+                                            <option value="Female" {{$user->gender=='Female'?"selected":""}}>Female</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
@@ -73,7 +93,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 @endsection

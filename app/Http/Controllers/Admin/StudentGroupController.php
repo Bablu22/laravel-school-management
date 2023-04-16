@@ -29,7 +29,6 @@ class StudentGroupController extends Controller
     public function destroy(StudentGroup $group): RedirectResponse
     {
         $group->delete();
-        toastr()->success('Student group deleted success.');
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Delete success');
     }
 }

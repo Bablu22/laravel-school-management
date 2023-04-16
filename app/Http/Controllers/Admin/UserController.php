@@ -32,20 +32,17 @@ class UserController extends Controller
             'password' => 'required',
         ]);
         if ($validator->fails()) {
-            foreach ($validator->errors()->all() as $error) {
-                toastr()->error($error);
-            }
-            return redirect()->back()->withInput();
+            return handleValidationErrors($validator);
         }
-
+        $code = $request->password;
         $user = new  User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        $user->code = $code;
+        $user->password = bcrypt($code);
         $user->role = $request->role;
         $user->save();
-        toastr()->success('User created success.');
-        return redirect()->route('user.all');
+        return redirect()->back()->with('success', 'User create success');
     }
 
     public function update(User $user): View
@@ -59,8 +56,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->role = $request->role;
         $user->save();
-        toastr()->success('User updated success.');
-        return redirect()->route('user.all');
+        return redirect()->back()->with('success', 'Update success');
     }
 
     public function destroy(User $user): RedirectResponse
@@ -69,24 +65,22 @@ class UserController extends Controller
             Storage::disk('public')->delete('/uploads/avatar/' . $user->profile_photo_path);
         }
         $user->delete();
-        toastr()->success('User deleted success.');
-        return redirect()->route('user.all');
+        return redirect()->back()->with('success', 'Delete success');
     }
 
     public function deactivateUser(User $user): RedirectResponse
     {
         $user->status = 0;
         $user->save();
-        toastr()->success('User has been deactivated.');
-        return back();
+        return redirect()->back()->with('success', 'User has been deactivated.');
+
     }
 
     public function activateUser(User $user): RedirectResponse
     {
         $user->status = 1;
         $user->save();
-        toastr()->success('User has been activated.');
-        return back();
+        return redirect()->back()->with('success', 'User has been activated.');
     }
 
 }

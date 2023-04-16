@@ -29,7 +29,6 @@ class StudentShiftController extends Controller
     public function destroy(StudentShift $shift): RedirectResponse
     {
         $shift->delete();
-        toastr()->success('Student shift deleted success.');
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Delete success');
     }
 }

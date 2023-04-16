@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @method static findOrFail(mixed $groupId)
+ * @property mixed $assign_student_id
+ * @property mixed|string $fee_category_id
+ * @property mixed $discount
  */
-class StudentGroup extends Model
+class DiscountStudent extends Model
 {
     use HasFactory;
 }

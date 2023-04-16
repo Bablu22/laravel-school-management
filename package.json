@@ -17,6 +17,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "handlebars": "^4.7.7",
         "sweetalert2": "^11.7.3",
         "toastr": "^2.1.4"
     }

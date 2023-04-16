@@ -131,12 +131,6 @@
                                                         data-target="#editClassModal{{ $amount->id }}"><span
                                                         class="ion-edit text-white"></span>
                                                 </button>
-                                                <a href="{{ route('subject-assign.destroy', $amount->id) }}"
-                                                   id="delete"
-                                                   class="tabledit-delete-button btn btn-lg btn-danger"
-                                                   style="float: none; margin:0 5px;"><span
-                                                        class="ti-trash text-white"></span>
-                                                </a>
                                                 <a href="{{ route('subject-assign.details', $amount->class_id) }}"
                                                    class="btn btn-lg btn-info"
                                                    style="float: none; margin:0 5px;">Details

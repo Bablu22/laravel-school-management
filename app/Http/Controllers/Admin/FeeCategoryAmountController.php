@@ -9,6 +9,7 @@ use App\Models\StudentClass;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class FeeCategoryAmountController extends Controller
@@ -35,15 +36,21 @@ class FeeCategoryAmountController extends Controller
     {
         $fee_category_amount = FeeCategoryAmount::find($id);
         $fee_category_amount->delete();
-        toastr()->success('Deleted success.');
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Delete success');
     }
 
     function storeOrUpdateModel($modelClass, $requestData, $id = null): RedirectResponse
     {
         $validator = Validator::make($requestData, [
             'amount' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'class_id' => [
+                'required',
+                Rule::unique('fee_category_amounts')->where(function ($query) use ($requestData) {
+                    return $query->where('fee_category_id', $requestData['fee_category_id']);
+                })->ignore($id),
+            ],
         ]);
+
         if ($validator->fails()) {
             return handleValidationErrors($validator);
         }
@@ -53,8 +60,9 @@ class FeeCategoryAmountController extends Controller
         $model->class_id = $requestData['class_id'];
         $model->amount = $requestData['amount'];
         $model->save();
-        toastr()->success(($id ? 'Update' : 'Add') . ' success');
-        return redirect()->back();
+
+        return redirect()->back()->with('success', ($id ? 'Update' : 'Add') . ' success');
     }
+
 }
 

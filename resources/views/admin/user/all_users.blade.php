@@ -46,6 +46,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
+                                    <th>Password</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -64,6 +65,7 @@
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->role}}</td>
+                                        <td>{{$user->code}}</td>
                                         <td>{{$user->status ==1 ?"Active":"Deactivated"}}</td>
                                         <td>
                                             <div class="btn-group btn-group-sm" style="float: none;">

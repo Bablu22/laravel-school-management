@@ -19,6 +19,20 @@ use Laravel\Sanctum\HasApiTokens;
  * @property int|mixed $status
  * @property mixed $phone
  * @property mixed|string $profile_photo_path
+ * @property mixed $gender
+ * @property mixed $address
+ * @property mixed $code
+ * @property mixed $father_name
+ * @property mixed $mother_name
+ * @property mixed $religion
+ * @property mixed $date_of_birth
+ * @property mixed $discount
+ * @property mixed $year_id
+ * @property mixed|string $id_no
+ * @property mixed|string $usertype
+ * @property mixed|string $roll
+ * @method static max(string $string)
+ * @method static findOrFail($id)
  */
 class User extends Authenticatable
 {

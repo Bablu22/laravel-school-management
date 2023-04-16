@@ -29,7 +29,6 @@ class SubjectController extends Controller
     public function destroy(Subject $subject): RedirectResponse
     {
         $subject->delete();
-        toastr()->success('Subject deleted success.');
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Delete success');
     }
 }

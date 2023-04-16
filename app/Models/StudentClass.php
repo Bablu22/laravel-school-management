@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property mixed $name
  * @method static latest()
+ * @method static findOrFail(mixed $classId)
  */
 class StudentClass extends Model
 {

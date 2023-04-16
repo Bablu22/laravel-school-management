@@ -29,7 +29,6 @@ class StudentYearController extends Controller
     public function destroy(StudentYear $year): RedirectResponse
     {
         $year->delete();
-        toastr()->success('Student year deleted success.');
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Delete success');
     }
 }

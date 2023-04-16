@@ -50,10 +50,18 @@
                                 <div class="form-group mb-3">
                                     <label for="role" class="my-2 py-1">Role</label>
                                     <div>
-                                        <select id="role" name="role" class="form-control" required="">
-                                            <option value="user" {{$user->role=='user'?"selected":""}}>User</option>
-                                            <option value="admin" {{$user->role=='admin'?"selected":""}}>Admin</option>
+
+                                        <select id="role" name="role"
+                                                class="select2 form-control mb-3 custom-select">
+                                            <option value="" disabled selected hidden>Select</option>
+                                            <option value="User" {{$user->role=='User'?"selected":""}}>User</option>
+                                            <option value="Admin" {{$user->role=='Admin'?"selected":""}}>Admin</option>
+                                            <option value="Operator" {{$user->role=='Operator'?"selected":""}}>
+                                                Operator
+                                            </option>
                                         </select>
+
+
                                     </div>
                                 </div>
                                 <div class="form-group mb-0">

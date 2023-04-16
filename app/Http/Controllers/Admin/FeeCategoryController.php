@@ -29,7 +29,6 @@ class FeeCategoryController extends Controller
     public function destroy(FeeCategory $year): RedirectResponse
     {
         $year->delete();
-        toastr()->success('Student fee category deleted success.');
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Delete success');
     }
 }

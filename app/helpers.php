@@ -9,23 +9,21 @@ function storeOrUpdateModel($modelClass, $requestData, $id = null): RedirectResp
     $validator = Validator::make($requestData, [
         'name' => 'required|unique:' . (new $modelClass)->getTable() . ',name,' . ($id ? $id : 'NULL')
     ]);
+
     if ($validator->fails()) {
-        foreach ($validator->errors()->all() as $error) {
-            toastr()->error($error);
-        }
-        return redirect()->back()->withInput();
+        return handleValidationErrors($validator);
     }
+
     $model = $id ? $modelClass::find($id) : new $modelClass();
     $model->name = $requestData['name'];
     $model->save();
-    toastr()->success(($id ? 'Update' : 'Add') . ' success');
-    return redirect()->back();
+    return redirect()->back()->with('success', ($id ? 'Update' : 'Add') . ' success');
 }
 
-function handleValidationErrors($validateData): RedirectResponse
+function handleValidationErrors($validateData): ?RedirectResponse
 {
     foreach ($validateData->errors()->all() as $error) {
-        toastr()->error($error);
+        return redirect()->back()->with('error', $error);
     }
-    return redirect()->back()->withInput();
+    return null;
 }

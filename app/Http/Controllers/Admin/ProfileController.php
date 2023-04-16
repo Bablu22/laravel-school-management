@@ -31,6 +31,9 @@ class ProfileController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->gender = $request->gender;
+        $user->address = $request->address;
+
         if ($request->hasFile('photo')) {
             $image = $request->file('photo');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -46,8 +49,7 @@ class ProfileController extends Controller
             $user->save();
         }
         $user->save();
-        toastr()->success('User update success');
-        return back();
+        return redirect()->back()->with('success', 'Update success');
     }
 
     public function passwordChange(): View
@@ -68,8 +70,7 @@ class ProfileController extends Controller
             $user->save();
             $this->guard()->logout();
             $request->session()->invalidate();
-            toastr()->success('User update success');
-            return redirect()->route('login');
+            return redirect()->back()->with('success', 'Update success');
         } else {
             throw ValidationException::withMessages([
                 'current_password' => 'The provided password does not match your current password.',
