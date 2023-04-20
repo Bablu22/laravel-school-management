@@ -13,7 +13,7 @@
                                         Amount</a></li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Student Monthly Fee Management</h4>
+                        <h4 class="page-title">Student Exam Fee Management</h4>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -24,8 +24,8 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between mb-4">
                                 <h4 class="mt-0 header-title">All Fees Amounts</h4>
-                                <a href="{{route('monthly-fee.create')}}" class="btn btn-primary btn-sm">Add
-                                    Monthly Fee</a>
+                                <a href="{{route('exam-fee.create')}}" class="btn btn-primary btn-sm">Add
+                                    Exam Fee</a>
                             </div>
 
                             <table id="datatable" class="table table-bordered">
@@ -37,25 +37,27 @@
                                     <th>Year</th>
                                     <th>Class</th>
                                     <th>Group</th>
-                                    <th>Month</th>
-                                    <th>Amount</th>
+                                    <th>Exam Fee</th>
+                                    <th>Discount</th>
+                                    <th>Original Fee</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($monthly_fees as $key=> $amount)
+                                @foreach($examFees as $key=> $amount)
                                     <tr>
                                         <td>{{$key+1}}</td>
-                                        <td>{{$amount['student']['name']}}</td>
-                                        <td>{{$amount['student']['roll']}}</td>
-                                        <td>{{$amount['year']['name']}}</td>
-                                        <td>{{$amount['class']['name']}}</td>
-                                        <td>{{$amount['group']['name']}}</td>
-                                        <td>{{$amount->month}}</td>
-                                        <td>{{$amount->amount}}</td>
+                                        <td>{{ $amount['name'] }}</td>
+                                        <td>{{ $amount['roll'] }}</td>
+                                        <td>{{ $amount['year'] }}</td>
+                                        <td>{{ $amount['class']}}</td>
+                                        <td>{{ $amount['group']}}</td>
+                                        <td>{{ $amount['examFee']}}</td>
+                                        <td>{{ $amount['discount']}}</td>
+                                        <td>{{ $amount['discounted_fee']}}</td>
                                         <td>
                                             <a class="btn btn-primary btn-sm"
-                                               href="{{route("monthly-fee.payslip") . '?student_id=' . $amount->student_id}}">Fee
+                                               href="{{route("exam-fee.payslip") . '?student_id=' . $amount['student_id']}}">Fee
                                                 Slip</a>
                                         </td>
                                     </tr>

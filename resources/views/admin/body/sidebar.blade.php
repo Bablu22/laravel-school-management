@@ -46,6 +46,7 @@
                     <li><a href="{{route('student-registration.all')}}">Student Registration</a></li>
                     <li><a href="{{route('reg-fee.all')}}">Registration Fees</a></li>
                     <li><a href="{{route('monthly-fee.all')}}">Monthly Fees</a></li>
+                    <li><a href="{{route('exam-fee.all')}}">Exam Fees</a></li>
                 </ul>
             </li>
         </ul>

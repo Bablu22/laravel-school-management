@@ -13,7 +13,7 @@
                                         management</a></li>
                                 <li class="breadcrumb-item"><a href="{{route('student-registration.all')}}">Student
                                         list</a></li>
-                                <li class="breadcrumb-item"><a href="{{route('monthly-fee.create')}}">Monthly Fees</a>
+                                <li class="breadcrumb-item"><a href="{{route('exam-fee.all')}}">Exam Fees</a>
                                 </li>
                             </ol>
                         </div>
@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <form class="" action="{{route('monthly-fee.store')}}" method="POST" novalidate=""
+                            <form class="" action="{{route('exam-fee.store')}}" method="POST" novalidate=""
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('POST')
@@ -94,22 +94,22 @@
                                         </select>
                                     </div>
                                     <div class="form-group mb-0 col-lg-4">
-                                        <label for="month" class="mb-2 pb-1">Month</label>
-                                        <select required id="class" name="month"
+                                        <label for="discount" class="mb-2 pb-1">Discount</label>
+                                        <input value="{{old('discount')}}" type="text" id="discount" name="discount"
+                                               class="form-control"
+                                               placeholder="0000">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="form-group mb-0 col-lg-4">
+                                        <label for="exam_type" class="mb-2 pb-1">Exam Type</label>
+                                        <select required id="exam_type" name="exam_type"
                                                 class="select2 form-control mb-3 custom-select">
-                                            <option value="" selected="" disabled="">Select Month</option>
-                                            <option value="January">January</option>
-                                            <option value="Febuary">Febuary</option>
-                                            <option value="March">March</option>
-                                            <option value="April">April</option>
-                                            <option value="May">May</option>
-                                            <option value="Jun">Jun</option>
-                                            <option value="July">July</option>
-                                            <option value="August">August</option>
-                                            <option value="September">September</option>
-                                            <option value="October">October</option>
-                                            <option value="November">November</option>
-                                            <option value="December">December</option>
+                                            <option disabled selected hidden>Select</option>
+                                            @foreach($examTypes as $exam)
+                                                <option
+                                                    value="{{$exam->id}}">{{$exam->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

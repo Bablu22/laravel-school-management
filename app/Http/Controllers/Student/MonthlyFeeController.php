@@ -15,6 +15,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 class MonthlyFeeController extends Controller
@@ -43,6 +44,18 @@ class MonthlyFeeController extends Controller
 
     public function MonthlyFeeStore(Request $request): RedirectResponse
     {
+        $validator = Validator::make($request->all(), [
+            'year' => 'required',
+            'class' => 'required',
+            'group' => 'required',
+            'name' => 'required',
+            'roll' => 'required',
+            'month' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return handleValidationErrors($validator);
+        }
         $studentId = User::where('name', $request->name)
             ->where('roll', $request->roll)
             ->value('id');

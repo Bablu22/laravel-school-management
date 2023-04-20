@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Student\StudentRegController;
 use App\Http\Controllers\Student\RegistrationFeeController;
 use App\Http\Controllers\Student\MonthlyFeeController;
+use App\Http\Controllers\Student\ExamFeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -159,12 +160,21 @@ Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session
 
     });
 
-    // Student student registration fee management setup
+    // Student student monthly fee management setup
     Route::controller(MonthlyFeeController::class)->group(function () {
         Route::get('/student/monthly-fees', 'MonthlyFeeView')->name('monthly-fee.all');
         Route::get('/student/monthly-fees/creat', 'MonthlyFeeCreateView')->name('monthly-fee.create');
         Route::post('/student/monthly-fees/store', 'MonthlyFeeStore')->name('monthly-fee.store');
         Route::get('/student/monthly-fees/payslip', 'MonthlyFeePayslip')->name('monthly-fee.payslip');
+
+    });
+
+    // Student student exam fee management setup
+    Route::controller(ExamFeeController::class)->group(function () {
+        Route::get('/student/exam-fees', 'ExamFeeView')->name('exam-fee.all');
+        Route::get('/student/exam-fees/creat', 'ExamFeeCreateView')->name('exam-fee.create');
+        Route::post('/student/exam-fees/store', 'ExamFeeStore')->name('exam-fee.store');
+        Route::get('/student/exam-fees/payslip', 'ExamFeePayslip')->name('exam-fee.payslip');
 
     });
 

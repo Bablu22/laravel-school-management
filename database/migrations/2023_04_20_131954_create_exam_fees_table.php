@@ -10,14 +10,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('monthly_fees', function (Blueprint $table) {
+        Schema::create('exam_fees', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('year_id');
             $table->unsignedBigInteger('class_id');
             $table->unsignedBigInteger('group_id');
-            $table->string('month');
+            $table->unsignedBigInteger('exam_type_id');
             $table->string('amount');
+            $table->string('discount')->default('0');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('monthly_fees');
+        Schema::dropIfExists('exam_fees');
     }
 };

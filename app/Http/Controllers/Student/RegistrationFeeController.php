@@ -51,8 +51,8 @@ class RegistrationFeeController extends Controller
 
         $details = AssignStudent::with(['student', 'discount'])->where('student_id', $student_id)->where('class_id', $class_id)->first();
 
-        $fee_category_id = \App\Models\FeeCategory::where('name', 'LIKE', '%registration%')->value('id');
-        $registration_fee = \App\Models\FeeCategoryAmount::where('fee_category_id', $fee_category_id)
+        $fee_category_id =FeeCategory::where('name', 'LIKE', '%registration%')->value('id');
+        $registration_fee = FeeCategoryAmount::where('fee_category_id', $fee_category_id)
             ->where('class_id', $details->class_id)
             ->first();
         $original_fee = $registration_fee ? $registration_fee->amount : 0;
