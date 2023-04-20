@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('assign_student_id');
             $table->unsignedBigInteger('fee_category_id')->nullable();
-            $table->double('discount')->nullable();
+            $table->double('discount')->nullable()->default(0);
             $table->timestamps();
         });
     }

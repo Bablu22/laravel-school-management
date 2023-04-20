@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <form class="" action="{{route('student-registration.store')}}" method="POST" novalidate=""
+                            <form class="" action="{{route('monthly-fee.store')}}" method="POST" novalidate=""
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('POST')
@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="form-group mb-0 col-lg-4">
                                         <label for="class" class="mb-2 pb-1">Group</label>
-                                        <select required id="class" name="class"
+                                        <select required id="class" name="group"
                                                 class="select2 form-control mb-3 custom-select">
                                             <option disabled selected hidden>Select</option>
                                             @foreach($groups as $group)
@@ -72,30 +72,30 @@
                                 <div class="row mt-3">
                                     <div class="form-group mb-0 col-lg-4">
                                         <label for="year" class="mb-2 pb-1">Student Name</label>
-                                        <select required id="year" name="year"
+                                        <select required id="year" name="name"
                                                 class="select2 form-control mb-3 custom-select">
                                             <option disabled selected hidden>Select</option>
                                             @foreach($students as $student)
                                                 <option
-                                                    value="{{$student->id}}">{{$student['student']['name']}}</option>
+                                                    value="{{$student['student']['name']}}">{{$student['student']['name']}}</option>
                                             @endforeach
                                         </select>
                                     </div>
 
                                     <div class="form-group mb-0 col-lg-4">
                                         <label for="class" class="mb-2 pb-1">Student Roll</label>
-                                        <select required id="class" name="class"
+                                        <select required id="class" name="roll"
                                                 class="select2 form-control mb-3 custom-select">
                                             <option disabled selected hidden>Select</option>
                                             @foreach($students as $student)
                                                 <option
-                                                    value="{{$student->id}}">{{$student['student']['roll']}}</option>
+                                                    value="{{$student['student']['roll']}}">{{$student['student']['roll']}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group mb-0 col-lg-4">
                                         <label for="class" class="mb-2 pb-1">Month</label>
-                                        <select required id="class" name="class"
+                                        <select required id="class" name="month"
                                                 class="select2 form-control mb-3 custom-select">
                                             <option value="" selected="" disabled="">Select Month</option>
                                             <option value="January">January</option>

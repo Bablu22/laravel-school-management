@@ -23,7 +23,7 @@ function storeOrUpdateModel($modelClass, $requestData, $id = null): RedirectResp
 function handleValidationErrors($validateData): ?RedirectResponse
 {
     foreach ($validateData->errors()->all() as $error) {
-        return redirect()->back()->with('error', $error);
+        return redirect()->back()->with('error', $error)->exceptInput();
     }
     return null;
 }

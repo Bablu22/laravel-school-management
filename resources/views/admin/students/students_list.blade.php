@@ -75,6 +75,7 @@
                                                         class=" mdi mdi-eye text-white"></span>
                                                 </a>
                                                 <a href="{{ route('student-registration.delete', $student->student_id) }}"
+                                                   id="delete"
                                                    class="tabledit-delete-button btn btn-lg btn-danger"
                                                    style="float: none; margin:0 5px;"><span
                                                         class=" mdi mdi-delete text-white"></span>

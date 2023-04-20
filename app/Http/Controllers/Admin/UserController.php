@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function index(): View
     {
-        $users = User::all();
+        $users = User::whereIn('role', ['Admin', 'User', 'Operator'])->get();
         return view('admin.user.all_users', compact('users'));
     }
 

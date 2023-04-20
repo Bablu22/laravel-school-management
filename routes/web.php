@@ -31,7 +31,7 @@ use App\Http\Controllers\Student\MonthlyFeeController;
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/', function () {
         return redirect()->route('dashboard');
-    })->name('dashboard');
+    });
 });
 
 Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session'), 'verified'])->group(function () {
@@ -53,7 +53,7 @@ Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session
 
     // Profile related all routes
     Route::controller(ProfileController::class)->group(function () {
-        Route::get('/profile', 'indexProfile')->name('profile.show');
+        Route::get('/profile', 'indexProfile')->name('profile');
         Route::get('/profile/edit', 'editProfile')->name('profile.edit');
         Route::post('/profile/store/{user}', 'storeProfile')->name('profile.store');
         //Change password
@@ -161,9 +161,10 @@ Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session
 
     // Student student registration fee management setup
     Route::controller(MonthlyFeeController::class)->group(function () {
-        Route::get('/student/monthly-fees', 'MonthlyFeeCreateView')->name('monthly-fee.create');
-        Route::get('/student/monthly-fees/create', 'MonthlyFeeView')->name('monthly-fee.all');
-        Route::get('/registration/fees/payslip', 'RegFeePayslip')->name('reg-fee.payslip');
+        Route::get('/student/monthly-fees', 'MonthlyFeeView')->name('monthly-fee.all');
+        Route::get('/student/monthly-fees/creat', 'MonthlyFeeCreateView')->name('monthly-fee.create');
+        Route::post('/student/monthly-fees/store', 'MonthlyFeeStore')->name('monthly-fee.store');
+        Route::get('/student/monthly-fees/payslip', 'MonthlyFeePayslip')->name('monthly-fee.payslip');
 
     });
 

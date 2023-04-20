@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('year_id');
             $table->unsignedBigInteger('class_id');
+            $table->unsignedBigInteger('group_id');
             $table->string('month');
             $table->string('amount');
             $table->string('discount')->default('0');

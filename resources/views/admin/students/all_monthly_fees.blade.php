@@ -28,41 +28,40 @@
                                     Month Fee</a>
                             </div>
 
-                            {{--                            <table id="datatable" class="table table-bordered">--}}
-                            {{--                                <thead>--}}
-                            {{--                                <tr>--}}
-                            {{--                                    <th>SL</th>--}}
-                            {{--                                    <th>Class</th>--}}
-                            {{--                                    <th>Fee Category</th>--}}
-                            {{--                                    <th>Amount</th>--}}
-                            {{--                                    <th>Created At</th>--}}
-                            {{--                                    <th>Action</th>--}}
-                            {{--                                </tr>--}}
-                            {{--                                </thead>--}}
-                            {{--                                <tbody>--}}
-                            {{--                                @foreach($feeAmounts as $key=> $amount)--}}
-                            {{--                                    <tr>--}}
-                            {{--                                        <td>{{$key+1}}</td>--}}
-                            {{--                                        <td>{{$amount['student_class']['name']}}</td>--}}
-                            {{--                                        <td>{{$amount['fee_category']['name']}}</td>--}}
-                            {{--                                        <td>{{$amount->amount}}</td>--}}
-                            {{--                                        <td>{{ $amount->created_at->format('d M Y') }}</td>--}}
-                            {{--                                        <td>--}}
-                            {{--                                            <div class="btn-group btn-group-sm" style="float: none;">--}}
-
-                            {{--                                                <a href="{{ route('fee_category_amount.destroy', $amount->id) }}"--}}
-                            {{--                                                   id="delete"--}}
-                            {{--                                                   class="tabledit-delete-button btn btn-lg btn-danger"--}}
-                            {{--                                                   style="float: none; margin:0 5px;"><span--}}
-                            {{--                                                        class="ti-trash text-white"></span>--}}
-                            {{--                                                </a>--}}
-                            {{--                                            </div>--}}
-                            {{--                                        </td>--}}
-                            {{--                                    </tr>--}}
-
-                            {{--                                @endforeach--}}
-                            {{--                                </tbody>--}}
-                            {{--                            </table>--}}
+                            <table id="datatable" class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Name</th>
+                                    <th>Roll</th>
+                                    <th>Year</th>
+                                    <th>Class</th>
+                                    <th>Group</th>
+                                    <th>Month</th>
+                                    <th>Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($monthly_fees as $key=> $amount)
+                                    <tr>
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$amount['student']['name']}}</td>
+                                        <td>{{$amount['student']['roll']}}</td>
+                                        <td>{{$amount['year']['name']}}</td>
+                                        <td>{{$amount['class']['name']}}</td>
+                                        <td>{{$amount['group']['name']}}</td>
+                                        <td>{{$amount->month}}</td>
+                                        <td>{{$amount->amount}}</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-sm"
+                                               href="{{route("monthly-fee.payslip") . '?student_id=' . $amount->student_id}}">Fee
+                                                Slip</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

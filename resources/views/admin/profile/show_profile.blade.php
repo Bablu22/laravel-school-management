@@ -18,7 +18,7 @@
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="/">Main</a></li>
                                 <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="{{route('profile.show')}}">Profile</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li>
                             </ol>
                         </div>
                         <h4 class="page-title">Profile: {{$user->name}}</h4>

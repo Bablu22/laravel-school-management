@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="form-group mb-0 col-lg-4">
                                         <label for="mdate" class="mb-2 pb-1">Date of Birth</label>
-                                        <input type="date" class="select2 form-control" id="mdate" name="date_of_birth"
+                                        <input type="date" class="form-control" id="mdate" name="date_of_birth"
                                                required=""
                                                placeholder="Type address">
                                     </div>
@@ -119,7 +119,10 @@
                                                 class="select2 form-control mb-3 custom-select">
                                             <option disabled selected hidden>Select</option>
                                             @foreach($classes as $class)
-                                                <option value="{{$class->id}}">{{$class->name}}</option>
+                                                @php
+                                                    $className = \App\Models\StudentClass::where('id', $class->class_id)->value('name');
+                                                @endphp
+                                                <option value="{{ $class->class_id }}">{{ $className }}</option>
                                             @endforeach
 
                                         </select>

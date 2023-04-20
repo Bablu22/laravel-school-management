@@ -41,28 +41,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($allStudents as $student)
-                                    @php
-                                        $fee_category_id = \App\Models\FeeCategory::where('name', 'LIKE', '%registration%')->value('id');
-                                        $registration_fee = \App\Models\FeeCategoryAmount::where('fee_category_id', $fee_category_id)
-                                            ->where('class_id', $student['class']['id'])
-                                            ->first();
-                                        $original_fee = $registration_fee ? $registration_fee->amount : 0;
-                                        $discount = $student['discount']['discount'];
-                                        $discounted_fee = $discount / 100 * $original_fee;
-                                        $registrationFee = number_format((float)$original_fee - (float)$discounted_fee, 2, '.', '');
-                                    @endphp
+                                @foreach ($registrationFees as $registrationFee)
                                     <tr>
-                                        <td>{{ $student['student']['name'] }}</td>
-                                        <td>{{ $student['student']['id_no'] }}</td>
-                                        <td>{{ $student['student']['roll'] }}</td>
-                                        <td>{{ $student['year']['name'] }}</td>
-                                        <td>{{ $student['class']['name']}}</td>
-                                        <td>{{ $original_fee }}</td>
-                                        <td>{{ $discount }}%</td>
-                                        <td>{{ $registrationFee }}</td>
+                                        <td>{{ $registrationFee['name'] }}</td>
+                                        <td>{{ $registrationFee['id_no'] }}</td>
+                                        <td>{{ $registrationFee['roll'] }}</td>
+                                        <td>{{ $registrationFee['year'] }}</td>
+                                        <td>{{ $registrationFee['class']}}</td>
+                                        <td>{{ $registrationFee['original_fee']}}</td>
+                                        <td>{{ $registrationFee['discount']}}</td>
+                                        <td>{{ $registrationFee['registrationFee']}}</td>
                                         <td>
-                                            <a class="btn btn-primary btn-sm" href="{{route("reg-fee.payslip") . '?class_id=' . $student->class_id . '&student_id=' . $student->student_id}}">Fee Slip</a>
+                                            <a class="btn btn-primary btn-sm" href="{{route("reg-fee.payslip") . '?class_id=' . $registrationFee['class_id'] . '&student_id=' . $registrationFee['student_id']}}">Fee Slip</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -74,10 +64,8 @@
                 </div>
             </div>
 
-
         </div>
     </div>
-
 @endsection
 
 

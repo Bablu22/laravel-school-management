@@ -100,14 +100,12 @@
                                     </div>
                                     <div class="form-group mb-0 col-lg-4">
                                         <label for="mdate" class="mb-2 pb-1">Date of Birth</label>
-                                        <input type="date" class="select2 form-control" id="mdate" name="date_of_birth"
+                                        <input type="date" class=" form-control" id="mdate" name="date_of_birth"
                                                required=""
                                                value="{{$editData['student']['date_of_birth']}}"
                                                placeholder="Type address">
                                     </div>
-
                                 </div>
-
                                 <div class="row my-3">
                                     <div class="form-group mb-0 col-lg-6">
                                         <input type="file" name="profile_photo_path" id="input-file-now"

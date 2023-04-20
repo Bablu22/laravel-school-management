@@ -15,7 +15,7 @@ class AssignSubjectController extends Controller
 {
     public function subjectAssignIndex(): View
     {
-        $data['allData'] = AssignSubject::all();
+        $data['allData'] = AssignSubject::select('class_id')->groupBy('class_id')->get();
         $data['subjects'] = Subject::all();
         $data['student_classes'] = StudentClass::all();
         return view('admin.setup.all_assign_subject', $data);
@@ -25,6 +25,8 @@ class AssignSubjectController extends Controller
     {
 
         $data['detailsData'] = AssignSubject::where('class_id', $class_id)->orderBy('subject_id')->get();
+        $data['subjects'] = Subject::all();
+        $data['student_classes'] = StudentClass::all();
         return view('admin.setup.subject_details', $data);
     }
 

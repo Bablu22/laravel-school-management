@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use App\Models\AssignStudent;
 use App\Models\DiscountStudent;
+use App\Models\FeeCategoryAmount;
 use App\Models\StudentClass;
 use App\Models\StudentGroup;
 use App\Models\StudentRegistration;
@@ -13,12 +14,13 @@ use App\Models\StudentYear;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class StudentRegController extends Controller
@@ -36,8 +38,12 @@ class StudentRegController extends Controller
 
     public function registrationCreate(): View
     {
+        $fee_category_id = DB::table('fee_categories')->where('name', 'LIKE', '%registration%')->pluck('id')->first();
+        $classes = FeeCategoryAmount::select('class_id')
+            ->where('fee_category_id', $fee_category_id)
+            ->get();
         $data['years'] = StudentYear::all();
-        $data['classes'] = StudentClass::all();
+        $data['classes'] = $classes;
         $data['shifts'] = StudentShift::all();
         $data['groups'] = StudentGroup::all();
         return view('admin.students.create_registration', $data);
@@ -66,7 +72,6 @@ class StudentRegController extends Controller
 
         $classId = $request->input('class');
         $class = StudentClass::findOrFail($classId)->name;
-
 
         $programAbbreviation = '';
 
@@ -103,7 +108,8 @@ class StudentRegController extends Controller
             'name' => 'required|string|max:255',
             'father_name' => 'required|string|max:255',
             'mother_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:15',
+            'phone' => 'required|string',
+            'discount' => 'nullable|numeric|between:0,100',
             'address' => 'required|string|max:255',
             'gender' => 'required|string|max:10',
             'religion' => 'required|string|max:255',
@@ -154,10 +160,11 @@ class StudentRegController extends Controller
             'name' => 'required|string|max:255',
             'father_name' => 'required|string|max:255',
             'mother_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:15',
+            'phone' => 'required|string',
             'address' => 'required|string|max:255',
             'gender' => 'required|string|max:10',
             'religion' => 'required|string|max:255',
+            'discount' => 'nullable|numeric|between:0,100',
             'date_of_birth' => 'required|date',
             'profile_photo_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
@@ -174,6 +181,7 @@ class StudentRegController extends Controller
         $student->gender = $request->gender;
         $student->religion = $request->religion;
         $student->date_of_birth = date('Y-m-d', strtotime($request->date_of_birth));
+
 
         if ($request->hasFile('profile_photo_path')) {
             $image = $request->file('profile_photo_path');
@@ -194,7 +202,7 @@ class StudentRegController extends Controller
     }
 
 
-    public function details($id)
+    public function details($id): Response
     {
         $data['details'] = AssignStudent::with(['student', 'discount'])
             ->where('student_id', $id)
