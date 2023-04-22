@@ -12,7 +12,7 @@
             </li>
             @if(Auth::user()->role=='Admin')
                 <li>
-                    <a href="{{route('user.all')}}" class="waves-effect"><i class="mdi mdi-account"></i>
+                    <a href="{{route('user.all')}}" class="waves-effect"><i class="fas fa-user-tie"></i>
                         <span>Manage User</span></a>
                 </li>
             @endif
@@ -39,7 +39,7 @@
             </li>
 
             <li class="has_sub">
-                <a href="javascript:void(0);" class="waves-effect"><i class="ion-android-social"></i>
+                <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-user-graduate"></i>
                     <span>Student Manage</span> <span class="float-right"><i
                             class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="list-unstyled">
@@ -47,6 +47,15 @@
                     <li><a href="{{route('reg-fee.all')}}">Registration Fees</a></li>
                     <li><a href="{{route('monthly-fee.all')}}">Monthly Fees</a></li>
                     <li><a href="{{route('exam-fee.all')}}">Exam Fees</a></li>
+                </ul>
+            </li>
+            <li class="has_sub">
+                <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-users"></i>
+                    <span>Employee Manage</span> <span class="float-right"><i
+                            class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="list-unstyled">
+                    <li><a href="{{route('employee.all')}}">Employee Registration</a></li>
+                    <li><a href="{{route('employee.salary.view')}}">Employee Salary</a></li>
                 </ul>
             </li>
         </ul>

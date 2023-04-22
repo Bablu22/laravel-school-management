@@ -17,6 +17,9 @@ use App\Http\Controllers\Student\StudentRegController;
 use App\Http\Controllers\Student\RegistrationFeeController;
 use App\Http\Controllers\Student\MonthlyFeeController;
 use App\Http\Controllers\Student\ExamFeeController;
+use App\Http\Controllers\Employee\EmployeeRegController;
+use App\Http\Controllers\Employee\EmployeeSalaryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -163,7 +166,7 @@ Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session
     // Student student monthly fee management setup
     Route::controller(MonthlyFeeController::class)->group(function () {
         Route::get('/student/monthly-fees', 'MonthlyFeeView')->name('monthly-fee.all');
-        Route::get('/student/monthly-fees/creat', 'MonthlyFeeCreateView')->name('monthly-fee.create');
+        Route::get('/student/monthly-fees/create', 'MonthlyFeeCreateView')->name('monthly-fee.create');
         Route::post('/student/monthly-fees/store', 'MonthlyFeeStore')->name('monthly-fee.store');
         Route::get('/student/monthly-fees/payslip', 'MonthlyFeePayslip')->name('monthly-fee.payslip');
 
@@ -172,9 +175,29 @@ Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session
     // Student student exam fee management setup
     Route::controller(ExamFeeController::class)->group(function () {
         Route::get('/student/exam-fees', 'ExamFeeView')->name('exam-fee.all');
-        Route::get('/student/exam-fees/creat', 'ExamFeeCreateView')->name('exam-fee.create');
+        Route::get('/student/exam-fees/create', 'ExamFeeCreateView')->name('exam-fee.create');
         Route::post('/student/exam-fees/store', 'ExamFeeStore')->name('exam-fee.store');
         Route::get('/student/exam-fees/payslip', 'ExamFeePayslip')->name('exam-fee.payslip');
+
+    });
+
+    // Employee registration management setup
+    Route::controller(EmployeeRegController::class)->group(function () {
+        Route::get('/employees', 'EmployeeView')->name('employee.all');
+        Route::get('/employee/create', 'EmployeeCreateView')->name('employee.create');
+        Route::post('/employee/store', 'EmployeeStore')->name('employee.store');
+        Route::get('/employee/edit/{id}', 'EditEmployee')->name('employee.edit');
+        Route::get('/employee/details/{id}', 'EmployeeDetails')->name('employee.details');
+        Route::get('/employee/delete/{id}', 'EmployeeDelete')->name('employee.delete');
+        Route::post('/employee/update/{id}', 'EmployeeUpdate')->name('employee.update');
+
+    });
+
+    // Employee salary management setup
+    Route::controller(EmployeeSalaryController::class)->group(function () {
+        Route::get('salary/employee/view', 'SalaryView')->name('employee.salary.view');
+        Route::post('salary/employee/store/{id}', 'SalaryStore')->name('update.increment.store');
+        Route::get('salary/employee/details/{id}', 'SalaryDetails')->name('employee.salary.details');
 
     });
 
