@@ -94,7 +94,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="datepicker" class="mb-2 pb-1">Date</label>
-                                                            <input type="date" class="form-control" id="datepicker"
+                                                            <input type="text" class="form-control" id="datepicker"
                                                                    name="effected_salary"
                                                                    required=""
                                                                    placeholder="Type date">

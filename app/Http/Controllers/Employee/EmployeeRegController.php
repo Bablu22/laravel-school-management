@@ -43,7 +43,7 @@ class EmployeeRegController extends Controller
             'religion' => 'required|string',
             'date_of_birth' => 'required|date',
             'designation_id' => 'required|numeric',
-            'salary' => 'required|string',
+            'salary' => 'required|numeric',
             'join_date' => 'required|date',
         ]);
 

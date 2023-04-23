@@ -19,7 +19,9 @@ use App\Http\Controllers\Student\MonthlyFeeController;
 use App\Http\Controllers\Student\ExamFeeController;
 use App\Http\Controllers\Employee\EmployeeRegController;
 use App\Http\Controllers\Employee\EmployeeSalaryController;
-
+use App\Http\Controllers\Employee\EmployeeLeaveController;
+use App\Http\Controllers\Employee\EmployeeAttendanceController;
+use App\Http\Controllers\Employee\MonthlySalaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -200,6 +202,35 @@ Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session
         Route::get('salary/employee/details/{id}', 'SalaryDetails')->name('employee.salary.details');
 
     });
+
+    // Employee leave management setup
+    Route::controller(EmployeeLeaveController::class)->group(function () {
+        Route::get('leave/employee/view', 'LeaveView')->name('employee.leave.view');
+        Route::get('leave/employee/add', 'LeaveAdd')->name('employee.leave.add');
+        Route::post('leave/employee/store', 'LeaveStore')->name('store.employee.leave');
+        Route::get('leave/employee/edit/{id}', 'LeaveEdit')->name('employee.leave.edit');
+        Route::post('leave/employee/update/{id}', 'LeaveUpdate')->name('update.employee.leave');
+        Route::get('leave/employee/delete/{id}', 'LeaveDelete')->name('employee.leave.delete');
+
+    });
+
+    // Employee attendance management setup
+    Route::controller(EmployeeAttendanceController::class)->group(function () {
+        Route::get('attendance/employee/view', 'AttendanceView')->name('employee.attendance.view');
+        Route::get('attendance/employee/add', 'AttendanceAdd')->name('employee.attendance.add');
+        Route::post('attendance/employee/store', 'AttendanceStore')->name('store.employee.attendance');
+        Route::get('attendance/employee/edit/{date}', 'AttendanceEdit')->name('employee.attendance.edit');
+        Route::get('attendance/employee/details/{date}', 'AttendanceDetails')->name('employee.attendance.details');
+
+    });
+
+    // Employee monthly management setup
+    Route::controller(MonthlySalaryController::class)->group(function () {
+        Route::get('monthly/salary/view', 'MonthlySalaryView')->name('employee.monthly.salary');
+        Route::get('monthly/salary/get', 'MonthlySalaryGet')->name('employee.monthly.salary.get');
+        Route::get('monthly/salary/payslip/{employee_id}', 'MonthlySalaryPayslip')->name('employee.monthly.salary.payslip');
+    });
+
 
 });
 
