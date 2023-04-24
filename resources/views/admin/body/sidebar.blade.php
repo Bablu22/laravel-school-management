@@ -61,6 +61,17 @@
                     <li><a href="{{route('employee.monthly.salary')}}">Employee Salary</a></li>
                 </ul>
             </li>
+            <li class="has_sub">
+                <a href="javascript:void(0);" class="waves-effect"><i class="far fa-address-book
+"></i>
+                    <span>Marks Manage</span> <span class="float-right"><i
+                            class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="list-unstyled">
+                    <li><a href="{{route('marks.entry.add')}}">Marks Entry</a></li>
+                    <li><a href="{{route('marks.entry.edit')}}">Marks Edit</a></li>
+                    <li><a href="{{route('marks.entry.grade')}}">Marks Grade</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
     <div class="clearfix"></div>

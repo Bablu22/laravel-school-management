@@ -22,6 +22,10 @@ use App\Http\Controllers\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Employee\EmployeeAttendanceController;
 use App\Http\Controllers\Employee\MonthlySalaryController;
+use App\Http\Controllers\Student\MarkController;
+use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\Student\MarkGradeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -231,6 +235,26 @@ Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session
         Route::get('monthly/salary/payslip/{employee_id}', 'MonthlySalaryPayslip')->name('employee.monthly.salary.payslip');
     });
 
+    // Employee monthly management setup
+    Route::controller(MarkController::class)->group(function () {
+        Route::get('marks/entry/add', 'MarksAdd')->name('marks.entry.add');
+        Route::post('marks/entry/store', 'MarksStore')->name('marks.entry.store');
+        Route::get('marks/entry/edit', 'MarksEdit')->name('marks.entry.edit');
+        Route::get('marks/getstudents/edit', 'MarksEditGetStudents')->name('student.edit.getstudents');
+        Route::post('marks/entry/update', 'MarksUpdate')->name('marks.entry.update');
+    });
+
+    // Employee monthly management setup
+    Route::controller(MarkGradeController::class)->group(function () {
+        Route::get('marks/grade/view', 'MarksGradeView')->name('marks.entry.grade');
+        Route::get('marks/grade/add', 'MarksGradeAdd')->name('marks.grade.add');
+        Route::post('marks/grade/store', 'MarksGradeStore')->name('store.marks.grade');
+        Route::get('marks/grade/edit/{id}', 'MarksGradeEdit')->name('marks.grade.edit');
+        Route::post('marks/grade/update/{id}', 'MarksGradeUpdate')->name('update.marks.grade');
+    });
+
+    Route::get('marks/getsubject', [DefaultController::class, 'GetSubject'])->name('marks.getsubject');
+    Route::get('student/marks/getstudents', [DefaultController::class, 'GetStudents'])->name('student.marks.getstudents');
 
 });
 

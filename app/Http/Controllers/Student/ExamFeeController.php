@@ -16,6 +16,7 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
@@ -28,10 +29,13 @@ class ExamFeeController extends Controller
         $exam_fees = ExamFee::with('discount')->latest()->get();
 
         foreach ($exam_fees as $exam_fee) {
+
             $fee_category_id = DB::table('fee_categories')->where('name', 'LIKE', '%exam%')->pluck('id')->first();
+
             $exam_fee_category_amount = FeeCategoryAmount::where('fee_category_id', $fee_category_id)
-                ->where('class_id', $exam_fee['class_id'])
+                ->where('class_id', $exam_fee->class_id)
                 ->first();
+
             $original_fee = $exam_fee_category_amount ? $exam_fee_category_amount->amount : 0;
             $discount = isset($exam_fee['discount']) ? $exam_fee['discount']['discount'] : 0;
             $discounted_fee = $discount / 100 * $original_fee;
@@ -138,7 +142,7 @@ class ExamFeeController extends Controller
         return redirect()->back()->with('success', 'Exam fee added success');
     }
 
-    public function ExamFeePayslip(Request $request)
+    public function ExamFeePayslip(Request $request): Response
     {
         $examFees = [];
         $student_id = $request->input('student_id');
@@ -156,7 +160,6 @@ class ExamFeeController extends Controller
         $discounted_fee = $discount / 100 * $original_fee;
         $total = number_format((float)$original_fee - (float)$discounted_fee, 2, '.', '');
 
-
         $examFee = [
             'name' => $exam_fee['student']['name'],
             'id_no' => $exam_fee['student']['id_no'],
@@ -172,8 +175,6 @@ class ExamFeeController extends Controller
             'discount' => $discount,
             'discounted_fee' => $total,
         ];
-
-
 
         $pdf = PDF::loadView('admin.students.exam_fee_slip_pdf', $examFee);
         return $pdf->stream('document.pdf');
