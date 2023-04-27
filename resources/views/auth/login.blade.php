@@ -51,7 +51,7 @@
                     <div class="form-group row">
                         <div class="col-12">
                             <label for="email">Enter email</label>
-                            <input class="form-control" id="email" value="{{old('email')}}" name="email" type="email"
+                            <input class="form-control" id="email" value="admin@admin.com" name="email" type="email"
                                    required=""
                                    placeholder="Email">
                         </div>
@@ -60,7 +60,7 @@
                     <div class="form-group row">
                         <div class="col-12">
                             <label for="password">Enter password</label>
-                            <input class="form-control" id="password" name="password" value="{{old('passwprd')}}"
+                            <input class="form-control" id="password" name="password" value="admin123"
                                    type="password" required=""
                                    placeholder="Password">
                         </div>
