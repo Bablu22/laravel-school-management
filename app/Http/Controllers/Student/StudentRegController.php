@@ -8,7 +8,6 @@ use App\Models\DiscountStudent;
 use App\Models\FeeCategoryAmount;
 use App\Models\StudentClass;
 use App\Models\StudentGroup;
-use App\Models\StudentRegistration;
 use App\Models\StudentShift;
 use App\Models\StudentYear;
 use App\Models\User;

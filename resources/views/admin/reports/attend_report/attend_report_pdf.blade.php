@@ -40,79 +40,48 @@
                 <img src="{{ public_path() . $image_path }}" alt="" width="200">
 
             </h2></td>
-
-
         <td><h2>Easy School ERP</h2>
             <p>School Address</p>
             <p>Phone : 343434343434</p>
             <p>Email : support@eschool.com</p>
-            <p><b> Student Monthly Fee</b></p>
+            <p><b>Employee Attendance Report </b></p>
+
         </td>
     </tr>
 
 
 </table>
-
+<br> <br>
+<strong>Employee Name : </strong> {{ $allData['0']['user']['name'] }}, <strong> ID No
+    : </strong>{{ $allData['0']['user']['id_no'] }}, <strong> Month : </strong> {{ $month }}
+<br> <br>
 <table id="customers">
-    <tr>
-        <th width="10%">Sl</th>
-        <th width="45%">Student Details</th>
-        <th width="45%">Student Data</th>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td><b>Student ID No</b></td>
-        <td>{{ $id_no }}</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td><b>Roll No</b></td>
-        <td>{{ $roll }}</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td><b>Student Name</b></td>
-        <td>{{ $name }}</td>
-    </tr>
 
     <tr>
-        <td>4</td>
-        <td><b>Father's Name</b></td>
-        <td>{{ $father_name }}</td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td><b>Session</b></td>
-        <td>{{ $year }}</td>
-    </tr>
-    <tr>
-        <td>6</td>
-        <td><b>Class </b></td>
-        <td>{{ $class }}</td>
-    </tr>
-    <tr>
-        <td>7</td>
-        <td><b>Exam Fee</b></td>
-        <td>{{ $examFee }}</td>
-    </tr>
-    <tr>
-        <td>8</td>
-        <td><b>Discount Fee </b></td>
-        <td>{{ $discount }}</td>
+        <td width="50%"><h4>Date</h4></td>
+        <td width="50%"><h4> Attend Status </h4></td>
     </tr>
 
+    @foreach($allData as $value)
+        <tr>
+            <td width="50%"> {{ date('d-m-Y', strtotime($value->date )) }}  </td>
+            <td width="50%"> {{ $value->attend_status }} </td>
+        </tr>
+    @endforeach
+
     <tr>
-        <td>9</td>
-        <td><b>Fee For this Student of {{  $exam_type }} </b></td>
-        <td>{{ $discounted_fee }}</td>
+        <td colspan="2">
+            <strong>Total Absent : </strong> {{ $absents }} , <strong> Total Leave : </strong> {{ $leaves }}
+
+        </td>
     </tr>
 
 </table>
 <br> <br>
 <i style="font-size: 10px; float: right;">Print Data : {{ date("d M Y") }}</i>
 
+<hr style="border: dashed 2px; width: 95%; color: #000000; margin-bottom: 50px">
 
-<br> <br>
 
 </body>
 </html>

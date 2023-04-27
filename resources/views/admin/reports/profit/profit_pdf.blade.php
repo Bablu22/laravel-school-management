@@ -40,79 +40,79 @@
                 <img src="{{ public_path() . $image_path }}" alt="" width="200">
 
             </h2></td>
-
-
         <td><h2>Easy School ERP</h2>
             <p>School Address</p>
             <p>Phone : 343434343434</p>
-            <p>Email : support@eschool.com</p>
-            <p><b> Student Monthly Fee</b></p>
+            <p>Email : support@easylerningbd.com</p>
+            <p><b> Monthly and Yearly Profit </b></p>
+
         </td>
     </tr>
 
 
 </table>
 
+@php
+
+    $student_fee = App\Models\AccountStudentFee::whereBetween('date',[$start_date,$end_date])->sum('amount');
+
+         $other_cost = App\Models\OtherCostAccount::whereBetween('date',[$sdate,$edate])->sum('amount');
+
+         $emp_salary = App\Models\AccountSalary::whereBetween('date',[$start_date,$end_date])->sum('amount');
+
+         $total_cost = $other_cost+$emp_salary;
+         $profit = $student_fee-$total_cost;
+
+@endphp
+
 <table id="customers">
     <tr>
-        <th width="10%">Sl</th>
-        <th width="45%">Student Details</th>
-        <th width="45%">Student Data</th>
+        <td colspan="2" style="text-align: center;">
+            <h4>Reporting Date: {{ date('d M Y', strtotime($sdate) ) }} - {{ date('d M Y', strtotime($edate) ) }}</h4>
+
+        </td>
     </tr>
     <tr>
-        <td>1</td>
-        <td><b>Student ID No</b></td>
-        <td>{{ $id_no }}</td>
+        <td width="50%"><h4>Purpose</h4></td>
+        <td width="50%"><h4>Amount</h4></td>
+
     </tr>
     <tr>
-        <td>2</td>
-        <td><b>Roll No</b></td>
-        <td>{{ $roll }}</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td><b>Student Name</b></td>
-        <td>{{ $name }}</td>
+        <td>Student Fee</td>
+        <td> {{ $student_fee }}</td>
+
     </tr>
 
     <tr>
-        <td>4</td>
-        <td><b>Father's Name</b></td>
-        <td>{{ $father_name }}</td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td><b>Session</b></td>
-        <td>{{ $year }}</td>
-    </tr>
-    <tr>
-        <td>6</td>
-        <td><b>Class </b></td>
-        <td>{{ $class }}</td>
-    </tr>
-    <tr>
-        <td>7</td>
-        <td><b>Exam Fee</b></td>
-        <td>{{ $examFee }}</td>
-    </tr>
-    <tr>
-        <td>8</td>
-        <td><b>Discount Fee </b></td>
-        <td>{{ $discount }}</td>
+        <td>Employee Salary</td>
+        <td> {{ $emp_salary }} </td>
+
     </tr>
 
     <tr>
-        <td>9</td>
-        <td><b>Fee For this Student of {{  $exam_type }} </b></td>
-        <td>{{ $discounted_fee }}</td>
+        <td>Other Cost</td>
+        <td> {{ $other_cost }} </td>
+
     </tr>
+    <tr>
+        <td>Total Cost</td>
+        <td> {{ $total_cost }} </td>
+
+    </tr>
+
+    <tr>
+        <td>Profit</td>
+        <td>{{ $profit }}</td>
+
+    </tr>
+
 
 </table>
 <br> <br>
 <i style="font-size: 10px; float: right;">Print Data : {{ date("d M Y") }}</i>
 
+<hr style="border: dashed 2px; width: 95%; color: #000000; margin-bottom: 50px">
 
-<br> <br>
 
 </body>
 </html>

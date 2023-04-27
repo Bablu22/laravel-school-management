@@ -10,6 +10,9 @@ use App\Models\StudentYear;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class MarkController extends Controller
@@ -29,9 +32,12 @@ class MarkController extends Controller
     {
 
         $studentcount = $request->student_id;
+
         if ($studentcount) {
             for ($i = 0; $i < count($request->student_id); $i++) {
                 $data = new StudentMarks();
+
+                // Set the fields for the data object
                 $data->year_id = $request->year_id;
                 $data->class_id = $request->class_id;
                 $data->assign_subject_id = $request->assign_subject_id;
@@ -39,10 +45,32 @@ class MarkController extends Controller
                 $data->student_id = $request->student_id[$i];
                 $data->id_no = $request->id_no[$i];
                 $data->marks = $request->marks[$i];
-                $data->save();
 
+                // Validate if the data already exists
+                $validator = Validator::make($data->toArray(), [
+                    'year_id' => 'required',
+                    'class_id' => 'required',
+                    'assign_subject_id' => 'required',
+                    'exam_type_id' => 'required',
+                    'student_id' => ['required', Rule::unique('student_marks')->where(function ($query) use ($data) {
+                        return $query->where('year_id', $data->year_id)
+                            ->where('class_id', $data->class_id)
+                            ->where('assign_subject_id', $data->assign_subject_id)
+                            ->where('exam_type_id', $data->exam_type_id)
+                            ->where('student_id', $data->student_id);
+                    })]
+                ]);
+
+                // Check if validation fails
+                if ($validator->fails()) {
+                    return redirect()->back()->with('error', 'Duplicate data found for the same combination');
+                }
+
+                // Save the data
+                $data->save();
             }
         }
+
         return redirect()->back()->with('success', 'Marks entry success');
 
     }

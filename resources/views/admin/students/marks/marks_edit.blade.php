@@ -137,7 +137,7 @@
                             '<tr>' +
                             '<td>' + v.student.id_no + '<input type="hidden" name="student_id[]" value="' + v.student_id + '"> <input type="hidden" name="id_no[]" value="' + v.student.id_no + '"> </td>' +
                             '<td>' + v.student.name + '</td>' +
-                            '<td>' + v.student.fname + '</td>' +
+                            '<td>' + v.student.father_name + '</td>' +
                             '<td>' + v.student.gender + '</td>' +
                             '<td><input type="text" class="form-control form-control-sm" name="marks[]" value=" ' + v.marks + ' " ></td>' +
                             '</tr>';

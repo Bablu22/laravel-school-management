@@ -25,6 +25,13 @@ use App\Http\Controllers\Employee\MonthlySalaryController;
 use App\Http\Controllers\Student\MarkController;
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\Student\MarkGradeController;
+use App\Http\Controllers\Account\StudentFeeController;
+use App\Http\Controllers\Account\AccountSalaryController;
+use App\Http\Controllers\Account\AccountOtherCostController;
+use App\Http\Controllers\Profite\ProfiteController;
+use App\Http\Controllers\Account\MarkSheetController;
+use App\Http\Controllers\Report\AttendanceController;
+use App\Http\Controllers\Report\ResultReportController;
 
 
 /*
@@ -228,14 +235,14 @@ Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session
 
     });
 
-    // Employee monthly management setup
+    // Employee monthly salary management setup
     Route::controller(MonthlySalaryController::class)->group(function () {
         Route::get('monthly/salary/view', 'MonthlySalaryView')->name('employee.monthly.salary');
         Route::get('monthly/salary/get', 'MonthlySalaryGet')->name('employee.monthly.salary.get');
         Route::get('monthly/salary/payslip/{employee_id}', 'MonthlySalaryPayslip')->name('employee.monthly.salary.payslip');
     });
 
-    // Employee monthly management setup
+    // students marks management setup
     Route::controller(MarkController::class)->group(function () {
         Route::get('marks/entry/add', 'MarksAdd')->name('marks.entry.add');
         Route::post('marks/entry/store', 'MarksStore')->name('marks.entry.store');
@@ -244,7 +251,7 @@ Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session
         Route::post('marks/entry/update', 'MarksUpdate')->name('marks.entry.update');
     });
 
-    // Employee monthly management setup
+    // student grade management setup
     Route::controller(MarkGradeController::class)->group(function () {
         Route::get('marks/grade/view', 'MarksGradeView')->name('marks.entry.grade');
         Route::get('marks/grade/add', 'MarksGradeAdd')->name('marks.grade.add');
@@ -255,6 +262,62 @@ Route::middleware(['auth:sanctum', 'active_user', config('jetstream.auth_session
 
     Route::get('marks/getsubject', [DefaultController::class, 'GetSubject'])->name('marks.getsubject');
     Route::get('student/marks/getstudents', [DefaultController::class, 'GetStudents'])->name('student.marks.getstudents');
+
+
+    /// Account Management Routes
+    Route::controller(StudentFeeController::class)->group(function () {
+        Route::get('account/student/fee/view', 'StudentFeeView')->name('student.fee.view');
+        Route::get('account/student/registration-fee/add', 'StudentRegFeeAdd')->name('student.reg.fee.add');
+        Route::get('account/student/monthly-fee/add', 'StudentMonthlyFeeAdd')->name('student.monthly.fee.add');
+        Route::get('account/student/exam-fee/add', 'StudentExamFeeAdd')->name('student.exam.fee.add');
+        Route::post('account/student/fee/store', 'StudentFeeStore')->name('account.fee.store');
+    });
+
+    /// Account employee salary Management Routes
+    Route::controller(AccountSalaryController::class)->group(function () {
+        Route::get('account/salary/view', 'AccountSalaryView')->name('account.salary.view');
+        Route::get('account/salary/add', 'AccountSalaryAdd')->name('account.salary.add');
+        Route::post('account/salary/store', 'AccountSalaryStore')->name('account.salary.store');
+    });
+
+    /// Account other cost Management Routes
+    Route::controller(AccountOtherCostController::class)->group(function () {
+        Route::get('account/others/view', 'AccountOtherCostView')->name('account.others.view');
+        Route::post('account/others/store', 'AccountOtherCostStore')->name('account.others.store');
+        Route::post('account/others/update/{id}', 'AccountOtherCostUpdate')->name('account.others.update');
+        Route::get('account/others/delete/{id}', 'AccountOtherCostDelete')->name('account.others.delete');
+    });
+
+    /// Account profit Management Routes
+    Route::controller(ProfiteController::class)->group(function () {
+        Route::get('reports/profit/view', 'MonthlyProfitView')->name('monthly.profit.view');
+        Route::get('reports/profit/datewais', 'MonthlyProfitDatewais')->name('report.profit.datewais.get');
+        Route::get('reports/profit/pdf', 'MonthlyProfitPdf')->name('report.profit.pdf');
+    });
+
+    /// Account mark sheet generate Management Routes
+    Route::controller(MarkSheetController::class)->group(function () {
+        Route::get('marksheet/generate/view', 'MarkSheetView')->name('marksheet.generate.view');
+        Route::get('marksheet/generate/get', 'MarkSheetGet')->name('report.marksheet.get');
+    });
+
+    /// Attendance report Management Routes
+    Route::controller(AttendanceController::class)->group(function () {
+        Route::get('attendance/report/view', 'AttenReportView')->name('attendance.report.view');
+        Route::get('report/attendance/get', 'AttenReportGet')->name('report.attendance.get');
+    });
+
+    /// Result report  Management Routes
+    Route::controller(ResultReportController::class)->group(function () {
+        Route::get('student/result/view', 'ResultView')->name('student.result.view');
+        Route::get('student/result/get', 'ResultGet')->name('report.student.result.get');
+
+
+        // Student ID Card Routes
+        Route::get('student/idcard/view', 'IdcardView')->name('student.idcard.view');
+        Route::get('student/idcard/get', 'IdcardGet')->name('report.student.idcard.get');
+    });
+
 
 });
 

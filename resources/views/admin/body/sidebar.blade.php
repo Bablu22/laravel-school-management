@@ -72,6 +72,29 @@
                     <li><a href="{{route('marks.entry.grade')}}">Marks Grade</a></li>
                 </ul>
             </li>
+            <li class="has_sub">
+                <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-chart-area"></i>
+                    <span>Account Manage</span> <span class="float-right"><i
+                            class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="list-unstyled">
+                    <li><a href="{{route('student.fee.view')}}">Student Fee</a></li>
+                    <li><a href="{{route('account.salary.view')}}">Employee Salary</a></li>
+                    <li><a href="{{route('account.others.view')}}">Others Cost</a></li>
+
+                </ul>
+            </li>
+            <li class="has_sub">
+                <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-chart-pie"></i>
+                    <span>Reports</span> <span class="float-right"><i
+                            class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="list-unstyled">
+                    <li><a href="{{route('monthly.profit.view')}}">Monthly/Yearly Profit</a></li>
+                    <li><a href="{{route('marksheet.generate.view')}}">Mark sheet Generate</a></li>
+                    <li><a href="{{route('attendance.report.view')}}">Employee Attendance</a></li>
+                    <li><a href="{{route('student.result.view')}}">Student Result</a></li>
+                    <li><a href="{{route('student.idcard.view')}}">ID Card Generate</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
     <div class="clearfix"></div>
